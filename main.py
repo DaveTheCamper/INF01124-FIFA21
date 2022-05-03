@@ -1,25 +1,34 @@
-import csv
-from salva import *
+from PesquisaPosicao import pesquisaPosicao
+from salva import abreArquivos
+from PesquisaUsuarios import pesquisaUsuario
+from PesquisaPosicao import pesquisaPosicao
+from classe import *
+from menu import menu
 
-Tabela_jogadores = [None] * 19739
-Tabela_usuarios = [None] * 10007
-Tabela_posicoes = [None] * 23
-Tabela_tags = [None] * 364961
+Tabela_jogadores = [None] * Tam_jogadores
+Tabela_usuarios = [None] * Tam_usuarios
+Tabela_posicoes = [None] * Tam_posicoes
+Tabela_tags = [None] * Tam_tags
+opcao = 0
 
-arquivo = open('Arquivos/players.csv', mode='r')
-jogadores = csv.reader(arquivo)
-salvaJogadores(Tabela_jogadores, jogadores)
-arquivo.close()
+abreArquivos(Tabela_jogadores, Tabela_usuarios, Tabela_posicoes, Tabela_tags)
+while opcao != 3:
+    opcao = menu()
 
-arquivo = open('Arquivos/minirating.csv', mode='r')
-usuarios = csv.reader(arquivo)
-salvaUsuarios(Tabela_jogadores, Tabela_usuarios, usuarios)
-arquivo.close()
+    if(opcao == 1):
+        pesquisaUsuario(Tabela_jogadores, Tabela_usuarios)
+    
+    elif(opcao == 2):
+        pesquisaPosicao(Tabela_jogadores, Tabela_posicoes)
+    
+    elif(opcao == 3):
+        print('Programa encerrado')
+    
+    else:
+        print('Opcão inválida. Digite novamente')
 
-arquivo = open('Arquivos/players.csv', mode='r')
-jogadores = csv.reader(arquivo)
-salvaPosicoes(Tabela_posicoes, jogadores)
-arquivo.close()
+#for i in Tabela_posicoes:
+ #   print(i)
 
 
 
