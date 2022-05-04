@@ -39,7 +39,6 @@ while opcao != 3:
         
         elif(entrada[0] == 'tags'):
             tags = entrada[1].split("'")[1::2]
-            print(tags)
             pesquisaTag(Tabela_jogadores, Tabela_tags, tags)
         
         elif(entrada[0][0] == 't' and entrada[0][1] == 'o' and entrada[0][2] == 'p'):
@@ -47,6 +46,7 @@ while opcao != 3:
             tam = int(tam[1])
             posicao = entrada[1].strip()[1:-1].lower()
             pesquisaPosicao(Tabela_jogadores, Tabela_posicoes, posicao, tam)
+        
 
         elif(entrada[0] == 'player'):
             prefixo = entrada[1].lower()
@@ -57,12 +57,7 @@ while opcao != 3:
             print('\nPor favor, digite a sua entrada de acordo com os formatos de pesquisa\n')
 
     elif(opcao == 2):
-        print(f'\nTempo carregamento jogadores: {tempo_carregamento[1]}')
-        print(f'Tempo carregamento usuários: {tempo_carregamento[2]}')
-        print(f'Tempo carregamento posições: {tempo_carregamento[3]}')
-        print(f'Tempo carregamento tags: {tempo_carregamento[4]}')
-        print(f'Tempo carregamento nomes: {tempo_carregamento[5]}')
-        print(f'Tempo total de carregamentos: {tempo_carregamento[0]}')
+        imprimeTempos(tempo_carregamento)
     
     else:
         print('\nPrograma encerrado')
