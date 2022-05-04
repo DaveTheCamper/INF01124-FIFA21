@@ -1,28 +1,53 @@
 from classe import *
+from trie import *
 import csv
+import time
 
 
-def abreArquivos(Tabela_jogadores, Tabela_usuarios, Tabela_posicoes, Tabela_tags):
+
+def abreArquivos(Tabela_jogadores, Tabela_usuarios, Tabela_posicoes, Tabela_tags, tempo_carregamento):
+    
+    inicio = time.time()
     arquivo = open('Arquivos/players.csv', mode='r')
     jogadores = csv.reader(arquivo)
     salvaJogadores(Tabela_jogadores, jogadores)
     arquivo.close()
-
+    fim = time.time()
+    tempo_carregamento[1] = fim - inicio
+    
+    inicio = time.time()
     arquivo = open('Arquivos/rating.csv', mode='r')
     usuarios = csv.reader(arquivo)
     salvaUsuarios(Tabela_jogadores, Tabela_usuarios, usuarios)
     arquivo.close()
+    fim = time.time()
+    tempo_carregamento[2] = fim - inicio
 
+    inicio = time.time()
     arquivo = open('Arquivos/players.csv', mode='r')
     jogadores = csv.reader(arquivo)
     salvaPosicoes(Tabela_posicoes, jogadores)
     arquivo.close()
+    fim = time.time()
+    tempo_carregamento[3] = fim - inicio
 
+    inicio = time.time()
     arquivo = open('Arquivos/tags.csv', mode='r')
     tags = csv.reader(arquivo)
     salvaTags(Tabela_tags, tags)
     arquivo.close()
+    fim = time.time()
+    tempo_carregamento[4] = fim - inicio
 
+    inicio = time.time()
+    arquivo = open('Arquivos/players.csv', mode='r')
+    nomes = csv.reader(arquivo)
+    mainNode = loadJogadores(nomes)
+    arquivo.close()
+    fim = time.time()
+    tempo_carregamento[5] = fim - inicio
+
+    return mainNode
 
 
 def salvaJogadores(tabela, jogadores):

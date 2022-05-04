@@ -1,5 +1,3 @@
-import csv
-
 class Node:
     def __init__(self, id):
         self.ids = []
@@ -79,10 +77,3 @@ def getCharValue(char):
     else:
         return ord(char.lower()) - 97
 
-
-arquivo = open('Arquivos/players.csv', mode='r')
-jogadores = csv.reader(arquivo)
-#table = [['257261', 'Cameron Antwi', 'CDM']]
-mainNode = loadJogadores(jogadores)
-
-print(mainNode.searchJogador("Fernando"))
