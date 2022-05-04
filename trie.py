@@ -6,24 +6,23 @@ class Node:
         self.nodes = [None] * 31
 
     def __getitem__(self, i):
-        #print(self.nodes, ' ', i)
         if len(self.nodes) >= i:
             return self.nodes[i]
         else:
             return None
 
     def __setitem__(self, i, node):
-        #print(self.nodes, ' ', i)
         self.nodes[i] = node
 
+    # Verifica se o nodo é o final de algum nome
     def hasIds(self):
         return len(self.ids) > 0
 
+    # Busca algum jogador a partir do seu prefixo do nome
     def searchJogador(self, prefix):
         next = self
         for c in prefix:
             index = getCharValue(c)
-            #print(c, index, next.nodes)
             if next[index]:
                 next = next[index]
             else:
@@ -31,6 +30,8 @@ class Node:
 
         return next.findAllValues()
 
+    # Ao encontrar um nodo pela função acima, faz uma busca recursiva em seus filhos
+    # e os adiciona em uma lista contendo todos IDs encontrados
     def findAllValues(self):
         list = []
         if self.hasIds():
@@ -44,17 +45,16 @@ class Node:
 
         return list
 
+# Carrega a árvore trie e retorna o nodo base da árvore
 def loadJogadores(tabela_jogadores):
     #next(tabela_jogadores)
     node = Node(-1)
     for linha in tabela_jogadores:
-        #print(linha)
         id = linha[0]
         name = linha[1]
         last_node = node
         for c in name:
             index = getCharValue(c)
-            #print(c, index)
             if not last_node[index]:
                 last_node[index] = Node(-1)
             last_node = last_node[index]
@@ -62,7 +62,8 @@ def loadJogadores(tabela_jogadores):
     return node
 
 
-
+# Retorna o valor de cada letra e alguns casos extras que não estão
+# na sequencia da tabela ascii, como '"' e '.'
 def getCharValue(char):
     if char == ' ':
         return 26
