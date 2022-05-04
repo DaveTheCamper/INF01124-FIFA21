@@ -31,11 +31,11 @@ while opcao != 3:
         entrada = input('\n$ ').lower().split(' ', 1)
         
         if(entrada[0] == 'user'):
-            if isinstance(entrada[1], int):
+            if(entrada[1].isnumeric()):
                 user_id = int(entrada[1])
                 pesquisaUsuario(Tabela_jogadores, Tabela_usuarios, user_id)
             else:
-                print('O ID do usuário deve ser um numero')
+                print('\nO ID do usuário deve ser um numero')
         
         elif(entrada[0] == 'tags'):
             tags = entrada[1].split("'")[1::2]
