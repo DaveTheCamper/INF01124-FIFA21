@@ -5,17 +5,17 @@ from classe import *
 def pesquisaPosicao(Tabela_jogadores, Tabela_posicoes, posicao, tam):
     pos = mapHash(posicao, Tam_posicoes)
 
-    if(Tabela_posicoes[pos]):
+    if(Tabela_posicoes[pos]):   #Caso encontre a o endereço na tabela Hash de posições, percorre a lista no endereço
         print("\n{:<15} {:<50} {:<25} {:<20} {:<15}".format('fifa_id','name','player_position', 'rating', 'count'))
         for i in range(len(Tabela_posicoes[pos])):
-            if(Tabela_posicoes[pos][i].posicao == posicao):
-                ordenaPosicoes(Tabela_posicoes[pos][i].ids, Tabela_jogadores)
+            if(Tabela_posicoes[pos][i].posicao == posicao): #Caso encontre a posição
+                ordenaPosicoes(Tabela_posicoes[pos][i].ids, Tabela_jogadores)   #Ordena as avaliações do vetor de ids de jogadores que jogam nessa posição utilizando Shell Sort
                 for j in range(tam):
                     if(j < len(Tabela_posicoes[pos][i].ids)):
                         pos_jogador = mapHashNum(Tabela_posicoes[pos][i].ids[j], Tam_jogadores)
                         for k in range(len(Tabela_jogadores[pos_jogador])):
-                            if(Tabela_jogadores[pos_jogador][k].fifa_id == Tabela_posicoes[pos][i].ids[j]):
-                                if(Tabela_jogadores[pos_jogador][k].num >= 1000):
+                            if(Tabela_jogadores[pos_jogador][k].fifa_id == Tabela_posicoes[pos][i].ids[j]): #Quando encontrou o id do vetor de posições na tabela Hash de jogadores
+                                if(Tabela_jogadores[pos_jogador][k].num >= 1000):   #Caso o jogador tenha 1000 ou mais avaliações recebidas, imprime suas informações
                                     if(Tabela_jogadores[pos][k].num != 0):
                                         rating = Tabela_jogadores[pos_jogador][k].nota / Tabela_jogadores[pos_jogador][k].num
                                     else:
