@@ -43,10 +43,12 @@ while opcao != 3:
         
         elif(entrada[0][0] == 't' and entrada[0][1] == 'o' and entrada[0][2] == 'p'):
             tam = entrada[0].split('p')
-            tam = int(tam[1])
-            posicao = entrada[1].strip()[1:-1].lower()
-            pesquisaPosicao(Tabela_jogadores, Tabela_posicoes, posicao, tam)
-        
+            if(tam[1].isnumeric()):
+                tam = int(tam[1])
+                posicao = entrada[1].strip()[1:-1].lower()
+                pesquisaPosicao(Tabela_jogadores, Tabela_posicoes, posicao, tam)
+            else:
+                print('\nInforme um número limite de jogadores a serem mostrados')
 
         elif(entrada[0] == 'player'):
             prefixo = entrada[1].lower()
