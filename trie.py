@@ -36,7 +36,8 @@ class Node:
     def findAllValues(self):
         list = []
         if self.hasIds():
-            list.append(self.ids)
+            for id in self.ids:
+                list.append(id)
 
         for n in self.nodes:
             if n is not None:
