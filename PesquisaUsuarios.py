@@ -1,30 +1,9 @@
 from ast import Return
-from salva import mapHash, mapHashNum
+from salva import mapHashNum
 from classe import *
 
 
-def pesquisaUsuario(Tabela_jogadores, Tabela_usuarios):
-    user_id = recebeEntrada()
-    procuraId(user_id, Tabela_usuarios, Tabela_jogadores)
-    
-
-def recebeEntrada():
-    while True:
-        text = input('$ ')
-        teste = text.split(' ')
-        if(teste[0] == 'user'):
-            if(teste[1].isnumeric()):
-                user_id = int(teste[1])
-                break
-            else:
-                print('Por favor, a entrada deve estar no formato "user <userID>"')
-        else:
-            print('Por favor, a entrada deve estar no formato "user <userID>"')
-    return user_id
-
-
-
-def procuraId(user_id, Tabela_usuarios, Tabela_jogadores):
+def pesquisaUsuario(Tabela_jogadores, Tabela_usuarios, user_id):
     pos = mapHashNum(user_id, Tam_usuarios)
 
     if(Tabela_usuarios[pos]):
@@ -33,9 +12,9 @@ def procuraId(user_id, Tabela_usuarios, Tabela_jogadores):
                 ordenaAvals(Tabela_usuarios[pos][i].notas)
                 encontraJogadores(Tabela_usuarios[pos][i].notas, Tabela_jogadores)
                 return
-        print('ID de usuário não encontrado')
+        print('\nID de usuário não encontrado')
     else:
-        print('ID de usuário não encontrado')
+        print('\nID de usuário não encontrado')
 
 
 def encontraJogadores(avals, Tabela_jogadores):
@@ -81,7 +60,7 @@ def insertion_sort(C, h):
         chave = C[i]
         j = i - h
 
-        while(j>=0 and chave.nota < C[j].nota):
+        while(j>=0 and chave.nota > C[j].nota):
             C[j+h] = C[j]
             j -= h
     

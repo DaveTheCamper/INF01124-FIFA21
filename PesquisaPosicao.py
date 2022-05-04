@@ -1,39 +1,31 @@
-from PesquisaUsuarios import encontraJogadores
 from salva import mapHash, mapHashNum
 from classe import *
-import re
-
-def pesquisaPosicao(Tabela_jogadores, Tabela_posicoes):
-    tam, posicao = recebeEntrada()
-    procuraPosicao(Tabela_posicoes, Tabela_jogadores, posicao, tam)
-    
-    
-def recebeEntrada():
-    text = input('$ ')
-    separa = re.split('(\d+)', text)
-    
-    return int(separa[1]), separa[2].strip()[1:-1].lower() 
 
 
-def procuraPosicao(Tabela_posicoes, Tabela_jogadores, posicao, tam):
+def pesquisaPosicao(Tabela_jogadores, Tabela_posicoes, posicao, tam):
     pos = mapHash(posicao, Tam_posicoes)
 
     if(Tabela_posicoes[pos]):
-        print ("\n{:<15} {:<25} {:<25} {:<15} {:<20}".format('fifa_id','name','positions', 'rating', 'count'))
+        print("\n{:<15} {:<50} {:<25} {:<20} {:<15}".format('fifa_id','name','player_position', 'rating', 'count'))
         for i in range(len(Tabela_posicoes[pos])):
             if(Tabela_posicoes[pos][i].posicao == posicao):
                 ordenaPosicoes(Tabela_posicoes[pos][i].ids, Tabela_jogadores)
-                for i in range(len(Tabela_posicoes[pos])):
-                    if(Tabela_posicoes[pos][i].posicao == posicao):
-                        ordenaPosicoes(Tabela_posicoes[pos][i].ids, Tabela_jogadores)
-                        for j in range(tam):
-                            if(j < len(Tabela_posicoes[pos][i].ids)):
-                                pos_jogador = mapHashNum(Tabela_posicoes[pos][i].ids[j], Tam_jogadores)
-                                for k in range(len(Tabela_jogadores[pos_jogador])):
-                                    if(Tabela_jogadores[pos_jogador][k].num >= 1000):
+                for j in range(tam):
+                    if(j < len(Tabela_posicoes[pos][i].ids)):
+                        pos_jogador = mapHashNum(Tabela_posicoes[pos][i].ids[j], Tam_jogadores)
+                        for k in range(len(Tabela_jogadores[pos_jogador])):
+                            if(Tabela_jogadores[pos_jogador][k].fifa_id == Tabela_posicoes[pos][i].ids[j]):
+                                if(Tabela_jogadores[pos_jogador][k].num >= 1000):
+                                    if(Tabela_jogadores[pos][k].num != 0):
                                         rating = Tabela_jogadores[pos_jogador][k].nota / Tabela_jogadores[pos_jogador][k].num
-                                        print ("{:<15} {:<25} {:<25} {:<15} {:<15}".format(Tabela_jogadores[pos_jogador][k].fifa_id, Tabela_jogadores[pos_jogador][k].nome, ', '.join(Tabela_jogadores[pos_jogador][k].posicao), rating, Tabela_jogadores[pos_jogador][k].num))  #Imprime a tabela
+                                    else:
+                                        rating = 0.0
+                                    print("{:<15} {:<50} {:<25} {:<20} {:<15}".format(Tabela_jogadores[pos_jogador][k].fifa_id, Tabela_jogadores[pos_jogador][k].nome, ', '.join(Tabela_jogadores[pos_jogador][k].posicao), rating, Tabela_jogadores[pos_jogador][k].num))  #Imprime a tabela
+                return
 
+        print('\nPosição de jogador não encontrada')
+    else:
+        print('\nPosição de jogar não encontrada')
 
 def ordenaPosicoes(ids, Tabela_jogadores):
     seq = [1,4,10,23,57,132,301,701,1577,3548,7983,17961,40412,90927,204585,460316,1035711]

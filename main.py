@@ -58,6 +58,7 @@ while opcao != 3:
         print(f'Tempo carregamento usuários: {tempo_carregamento[2]}')
         print(f'Tempo carregamento posições: {tempo_carregamento[3]}')
         print(f'Tempo carregamento tags: {tempo_carregamento[4]}')
+        print(f'Tempo carregamento nomes: {tempo_carregamento[5]}')
         print(f'Tempo total de carregamentos: {tempo_carregamento[0]}')
     
     else:
